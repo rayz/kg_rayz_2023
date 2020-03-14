@@ -1,26 +1,29 @@
+import sys
 
 def is_one_to_one(s1, s2):
-    d = {}
-    if len(s1) != len(s2):
+    mapping = {} #maps one char in s1 to s2
+
+    if len(s1) != len(s2): #one_to_one only if same length
         return False
 
     for i in range(len(s1)):
-        if s1[i] in d:
-            if d[s1[i]] != s2[i]:
-                return False
+        if s1[i] in mapping and mapping[s1[i]] != s2[i]:
+            return False #maps to different chars
         else:
-            d[s1[i]] = s2[i]
+            mapping[s1[i]] = s2[i]
+
     return True
 
-def test():
-    print(is_one_to_one("abc", "bcd"))
-    print(is_one_to_one("foo", "bar"))
-    print(is_one_to_one("bar", "foo"))
-    print(is_one_to_one("", ""))
-    print(is_one_to_one("a", ""))
-    print(is_one_to_one("door", "door"))
-    print(is_one_to_one("doora", "baara"))
+def main():
+    if len(sys.argv) != 3:
+        print('false')
+        return False
+
+    if is_one_to_one(sys.argv[1], sys.argv[2]):
+        print('true')
+    else:
+        print('false')
 
 
-test()
-
+if __name__ ==  "__main__":
+    main()
